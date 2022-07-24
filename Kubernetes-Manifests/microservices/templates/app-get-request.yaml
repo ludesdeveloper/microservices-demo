@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: get-request
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: get-request
+  template:
+    metadata:
+      labels:
+        app: get-request
+    spec:
+      containers:
+        - name: get-request
+          image: "{{ .Values.getRequestImage }}"
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 5000
+          imagePullPolicy: Always
+          env:
+            - name: RABBIT_USER
+              valueFrom:
+                secretKeyRef:
+                  name: queue-db-default-user
+                  key: username
+            - name: RABBIT_URL
+              value: "queue-db"
+            - name: RABBIT_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: queue-db-default-user
+                  key: port
+            - name: RABBIT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: queue-db-default-user
+                  key: password
+      imagePullSecrets:
+        - name: gitlabcred
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: get-request
+spec:
+  selector:
+    app: get-request
+  ports:
+    - port: 5000
+      targetPort: 5000

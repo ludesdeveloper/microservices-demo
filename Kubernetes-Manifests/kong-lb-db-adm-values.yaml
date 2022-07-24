@@ -1,0 +1,20 @@
+postgresql:
+  enabled: true
+admin:
+  enabled: true
+  type: ClusterIP
+  http:
+    enabled: true
+  tls:
+    parameters: []
+env:
+  database: "postgres"
+kong:
+  env:
+    pg_user: kong
+    pg_password:
+      valueFrom:
+        secretKeyRef:
+          key: kong
+          name: postgres
+    nginx_worker_processes: "2"

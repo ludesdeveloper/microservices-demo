@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: register-consumer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: register-consumer
+  template:
+    metadata:
+      labels:
+        app: register-consumer
+    spec:
+      containers:
+        - name: register-consumer
+          image: "{{ .Values.registerConsumerImage }}"
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 5000
+          imagePullPolicy: Always
+          env:
+            - name: KONG_ADMIN_URL
+              value: "http://kong-kong-admin.kong.svc.cluster.local:8001"
+      imagePullSecrets:
+        - name: gitlabcred
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: register-consumer
+spec:
+  selector:
+    app: register-consumer
+  ports:
+    - port: 5000
+      targetPort: 5000

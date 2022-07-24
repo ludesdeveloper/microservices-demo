@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: microservices
+  annotations:
+    kubernetes.io/tls-acme: "true"
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    konghq.com/plugins: microservices-jwt
+spec:
+  ingressClassName: kong
+  tls:
+    - secretName: microservices
+      hosts:
+        - microservices.{{ .Values.nipIPAddress }}.nip.io
+  rules:
+    - host: microservices.{{ .Values.nipIPAddress }}.nip.io
+      http:
+        paths:
+          - path: /get-request
+            pathType: Prefix
+            backend:
+              service:
+                name: get-request
+                port:
+                  number: 5000
