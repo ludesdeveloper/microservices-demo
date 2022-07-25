@@ -17,7 +17,7 @@
 
 ### **Deployment**
 
-1. Please refer to this [deployment](Kubernetes-Manifests/) folder
+1. Please refer to this [Deployment](Kubernetes-Manifests/) folder
 
 ### **Postman Testing**
 
