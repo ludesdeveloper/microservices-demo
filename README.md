@@ -19,6 +19,10 @@
 
 1. Please refer to this [deployment](Kubernetes-Manifests/)
 
+### **Postman Testing**
+
+1. Please refer to this [Postman](Postman/) folder
+
 ### **Microservices**
 
 1. [Register Consumer](Register-Consumer/). Register consumers to Kong DB

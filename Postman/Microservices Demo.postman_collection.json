@@ -1,0 +1,110 @@
+{
+	"info": {
+		"_postman_id": "191d282e-a27b-42df-83aa-79612791c040",
+		"name": "Microservices Demo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8431215"
+	},
+	"item": [
+		{
+			"name": "Create Consumer + JWT",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"kongkong\",\r\n    \"password\":\"kongpassword\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://microservices.111-111-111-111.nip.io/register-consumer",
+					"protocol": "https",
+					"host": [
+						"microservices",
+						"111-111-111-111",
+						"nip",
+						"io"
+					],
+					"path": [
+						"register-consumer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login Consumer + JWT",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"kongkong\",\r\n    \"password\":\"kongpassword\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://microservices.111-111-111-111.nip.io/login-consumer",
+					"protocol": "https",
+					"host": [
+						"microservices",
+						"111-111-111-111",
+						"nip",
+						"io"
+					],
+					"path": [
+						"login-consumer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Write Data to DB",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "your_bearer_token",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Name\": \"Seski Ramadhan\",\r\n    \"Address\": \"LuDeS Corporation\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://microservices.111-111-111-111.nip.io/get-request",
+					"protocol": "https",
+					"host": [
+						"microservices",
+						"111-111-111-111",
+						"nip",
+						"io"
+					],
+					"path": [
+						"get-request"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
